@@ -1,58 +1,16 @@
 {
-    "BaseModel.e6ef10e0-a9a9-4f4e-b1b3-31ab8c037af1": {
-        "id": "e6ef10e0-a9a9-4f4e-b1b3-31ab8c037af1",
-        "created_at": "2023-02-07T10:56:17.987886",
-        "updated_at": "2023-02-07T10:56:17.987963",
-        "name": "My_First_Model",
-        "my_number": 89,
-        "__class__": "BaseModel"
-    },
-    "BaseModel.02660f87-252a-4120-bb4b-70cded1c0424": {
-        "id": "02660f87-252a-4120-bb4b-70cded1c0424",
-        "created_at": "2023-02-07T11:00:37.062957",
-        "updated_at": "2023-02-07T11:00:37.063014",
-        "name": "My_First_Model",
-        "my_number": 89,
-        "__class__": "BaseModel"
-    },
-    "BaseModel.d4e6b425-9f1a-4111-9603-60644452e4f9": {
-        "id": "d4e6b425-9f1a-4111-9603-60644452e4f9",
-        "created_at": "2023-02-07T11:00:41.482403",
-        "updated_at": "2023-02-07T11:00:41.482442",
-        "name": "My_First_Model",
-        "my_number": 89,
-        "__class__": "BaseModel"
-    },
-    "BaseModel.efca9a27-5991-4191-962b-b6523e1ff0cc": {
-        "id": "efca9a27-5991-4191-962b-b6523e1ff0cc",
-        "created_at": "2023-02-07T17:10:18.461545",
-        "updated_at": "2023-02-07T17:10:18.461665",
-        "__class__": "BaseModel"
-    },
-    "BaseModel.75194910-d0be-4c2c-8656-23096a42453b": {
-        "id": "75194910-d0be-4c2c-8656-23096a42453b",
-        "created_at": "2023-02-07T17:10:18.461614",
-        "updated_at": "2023-02-07T17:10:18.461618",
-        "__class__": "BaseModel"
-    },
-    "BaseModel.1f96020f-a1fc-48d6-b1f9-772d608df69e": {
-        "id": "1f96020f-a1fc-48d6-b1f9-772d608df69e",
-        "created_at": "2023-02-07T17:10:18.466124",
-        "updated_at": "2023-02-07T17:10:18.466243",
-        "__class__": "BaseModel"
-    },
-    "BaseModel.240ef55d-81ec-4276-99df-46d1ad592c9f": {
-        "id": "240ef55d-81ec-4276-99df-46d1ad592c9f",
-        "created_at": "2023-02-07T17:10:18.466197",
-        "updated_at": "2023-02-07T17:10:18.466201",
-        "__class__": "BaseModel"
-    },
     "BaseModel.9c88dafd-5662-44c7-8e05-5b147241b7d9": {
         "id": "9c88dafd-5662-44c7-8e05-5b147241b7d9",
         "created_at": "2023-02-07T17:33:26.286144",
         "updated_at": "2023-02-07T17:33:26.286465",
         "name": "My First Model",
         "my_number": 89,
+        "__class__": "BaseModel"
+    },
+    "BaseModel.e246f543-4233-425d-84ee-26d7418e38ca": {
+        "id": "e246f543-4233-425d-84ee-26d7418e38ca",
+        "created_at": "2023-02-08T10:03:37.972786",
+        "updated_at": "2023-02-08T10:03:37.972839",
         "__class__": "BaseModel"
     }
 }
