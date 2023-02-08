@@ -3,24 +3,33 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
+    file = None
+    class_name = ['BaseModel']
 
-    def do_create(self, arg):
-        if not arg:
+    def do_create(self, line):
+        if not line:
             print("** class name missing **")
+        elif line not in self.class_name:
+            print("** class doesn't exist **")
+        else:
+            base = eval(f'{line}()')
+            base.save()
+            print(base.id)
 
-    def do_quit(self, arg):
+
+    def do_quit(self, line):
         'Quit command to exit the program\n'
         return True
 
-    def do_EOF(self, arg):
+    def do_EOF(self, line):
         'Exits the program'
         return True
 
     def emptyline(self):
         pass
 
-    def default(self, arg):
-        print(arg, "is not a valid command")
+    def default(self, line):
+        print(line, "is not a valid command")
         print("Type 'help' to see list of available commands\n")
 
 
