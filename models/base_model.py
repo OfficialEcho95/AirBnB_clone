@@ -19,8 +19,8 @@ class BaseModel:
             str_u_at = attr['updated_at']
             attr['updated_at'] = datetime.strptime(str_u_at, '%Y-%m-%dT%H:%M:%S.%f')
 
-            for k in attr:
-                setattr(self, k, attr[k])
+            for key in attr:
+                setattr(self, key, attr[key])
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.today()

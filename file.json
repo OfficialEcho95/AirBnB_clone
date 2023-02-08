@@ -22,5 +22,37 @@
         "name": "My_First_Model",
         "my_number": 89,
         "__class__": "BaseModel"
+    },
+    "BaseModel.efca9a27-5991-4191-962b-b6523e1ff0cc": {
+        "id": "efca9a27-5991-4191-962b-b6523e1ff0cc",
+        "created_at": "2023-02-07T17:10:18.461545",
+        "updated_at": "2023-02-07T17:10:18.461665",
+        "__class__": "BaseModel"
+    },
+    "BaseModel.75194910-d0be-4c2c-8656-23096a42453b": {
+        "id": "75194910-d0be-4c2c-8656-23096a42453b",
+        "created_at": "2023-02-07T17:10:18.461614",
+        "updated_at": "2023-02-07T17:10:18.461618",
+        "__class__": "BaseModel"
+    },
+    "BaseModel.1f96020f-a1fc-48d6-b1f9-772d608df69e": {
+        "id": "1f96020f-a1fc-48d6-b1f9-772d608df69e",
+        "created_at": "2023-02-07T17:10:18.466124",
+        "updated_at": "2023-02-07T17:10:18.466243",
+        "__class__": "BaseModel"
+    },
+    "BaseModel.240ef55d-81ec-4276-99df-46d1ad592c9f": {
+        "id": "240ef55d-81ec-4276-99df-46d1ad592c9f",
+        "created_at": "2023-02-07T17:10:18.466197",
+        "updated_at": "2023-02-07T17:10:18.466201",
+        "__class__": "BaseModel"
+    },
+    "BaseModel.9c88dafd-5662-44c7-8e05-5b147241b7d9": {
+        "id": "9c88dafd-5662-44c7-8e05-5b147241b7d9",
+        "created_at": "2023-02-07T17:33:26.286144",
+        "updated_at": "2023-02-07T17:33:26.286465",
+        "name": "My First Model",
+        "my_number": 89,
+        "__class__": "BaseModel"
     }
 }
