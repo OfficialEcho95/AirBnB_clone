@@ -15,9 +15,11 @@ class BaseModel:
             attr = kwargs.copy()
             del attr['__class__']
             str_c_at = attr['created_at']
-            attr['created_at'] = datetime.strptime(str_c_at, '%Y-%m-%dT%H:%M:%S.%f')
+            attr['created_at'] = datetime.strptime(str_c_at,
+                                                   '%Y-%m-%dT%H:%M:%S.%f')
             str_u_at = attr['updated_at']
-            attr['updated_at'] = datetime.strptime(str_u_at, '%Y-%m-%dT%H:%M:%S.%f')
+            attr['updated_at'] = datetime.strptime(str_u_at,
+                                                   '%Y-%m-%dT%H:%M:%S.%f')
 
             for key in attr:
                 setattr(self, key, attr[key])
