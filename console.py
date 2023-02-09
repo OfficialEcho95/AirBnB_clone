@@ -65,6 +65,7 @@ class HBNBCommand(cmd.Cmd):
                     print('** no instance found **')
             except Exception:
                 print('** no instance found **')
+
     def do_all(self, line):
         'Prints all string rep. of all instances based or not on the class name'
         obj_list = []
@@ -90,6 +91,11 @@ class HBNBCommand(cmd.Cmd):
                     obj_list.append(str(base))
             print(obj_list)
 
+    def do_update(self, line):
+        'Updates an instance based on the class name and id by adding
+        or updating attributes'
+        pass
+
     def do_quit(self, line):
         'Quit command to exit the program\n'
         return True
@@ -104,7 +110,6 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         print(line, "is not a valid command")
         print("Type 'help' to see list of available commands\n")
-
 
 if __name__=='__main__':
     import sys
