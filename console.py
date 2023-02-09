@@ -2,11 +2,20 @@
 import cmd
 import json
 from models.base_model import BaseModel
+from models import storage
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     file = None
-    class_name = ['BaseModel']
+    class_name = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place',
+                  'Review']
 
     def do_create(self, line):
         'Creates a new instance from class_name[]'
@@ -67,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
                 print('** no instance found **')
 
     def do_all(self, line):
-        'Prints all string rep. of all instances based or not on the class name'
+        'Prints all str rep. of all instances based or not on the class name'
         obj_list = []
         objs = {}
         try:
@@ -92,9 +101,40 @@ class HBNBCommand(cmd.Cmd):
             print(obj_list)
 
     def do_update(self, line):
-        'Updates an instance based on the class name and id by adding
+        'Updates an instance based on the class name and id by adding \
         or updating attributes'
-        pass
+        arg = line.split(maxsplit=3)
+        arg_list = {"int": int, "float": float, "str": str}
+        try:
+            if not line:
+                print('** class name missing **')
+            elif arg[0] not in self.class_name:
+                print("** class doesn't exist **")
+            elif len(arg) < 2:
+                print('** instance id missing **')
+            elif arg[0] + '.' + arg[1] not in storage.all():
+                print("** no instance found **")
+            elif len(arg) < 3:
+                print("** attribute name missing **")
+            elif len(arg) < 4:
+                print("** value missing **")
+            else:
+                with open('file.json', 'r') as f:
+                    objs = json.loads(f.read())
+                base = eval(f'{arg[0]}()')
+                k, val = arg[2], arg[3].replace('"', '').replace("'", "")
+                key = arg[0] + '.' + arg[1]
+                typ = type(getattr(base, k, None))
+                if typ:
+                    if typ.__name__ in arg_list:
+                        func = arg_list[typ.__name__]
+                        val = func(val)
+                obj = objs[key]
+                obj[k] = val
+                with open('file.json', 'w') as f:
+                    json.dump(objs, f, indent=4)
+        except Exception as err:
+            print(err)
 
     def do_quit(self, line):
         'Quit command to exit the program\n'
@@ -111,7 +151,8 @@ class HBNBCommand(cmd.Cmd):
         print(line, "is not a valid command")
         print("Type 'help' to see list of available commands\n")
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     import sys
     if len(sys.argv) > 1:
         HBNBCommand().onecmd(' '.join(sys.argv[1:]))

@@ -1,10 +1,90 @@
 {
-    "BaseModel.b7d50553-c2e4-4649-805e-b834de68fb1b": {
-        "id": "b7d50553-c2e4-4649-805e-b834de68fb1b",
-        "created_at": "2023-02-08T19:28:31.455367",
-        "updated_at": "2023-02-08T19:28:31.455443",
-        "name": "My_First_Model",
-        "my_number": 89,
+    "BaseModel.f0096cd1-0465-4489-9399-ae261fc58a9a": {
+        "id": "f0096cd1-0465-4489-9399-ae261fc58a9a",
+        "created_at": "2023-02-09T10:14:30.388960",
+        "updated_at": "2023-02-09T10:14:30.389083",
+        "first_name": "Betty",
         "__class__": "BaseModel"
+    },
+    "User.2ece2c63-97b6-4910-ba77-9cfd0be90e30": {
+        "id": "2ece2c63-97b6-4910-ba77-9cfd0be90e30",
+        "created_at": "2023-02-09T11:08:58.341497",
+        "updated_at": "2023-02-09T11:08:58.341545",
+        "first_name": "Betty",
+        "last_name": "Bar",
+        "email": "airbnb@mail.com",
+        "password": "root",
+        "__class__": "User"
+    },
+    "User.dab4be80-6731-4f74-821b-45b1cfc2e425": {
+        "id": "dab4be80-6731-4f74-821b-45b1cfc2e425",
+        "created_at": "2023-02-09T11:08:58.343085",
+        "updated_at": "2023-02-09T11:08:58.344074",
+        "first_name": "John",
+        "email": "airbnb2@mail.com",
+        "password": "root",
+        "__class__": "User"
+    },
+    "User.7ec7e860-9f85-403b-ba14-b235c371b4b5": {
+        "id": "7ec7e860-9f85-403b-ba14-b235c371b4b5",
+        "created_at": "2023-02-09T11:12:13.591456",
+        "updated_at": "2023-02-09T11:12:13.591972",
+        "first_name": "Betty",
+        "last_name": "Bar",
+        "email": "airbnb@mail.com",
+        "password": "root",
+        "__class__": "User"
+    },
+    "User.ce5e390e-2b09-4da8-b60d-ca961f4ba4bf": {
+        "id": "ce5e390e-2b09-4da8-b60d-ca961f4ba4bf",
+        "created_at": "2023-02-09T11:12:13.596488",
+        "updated_at": "2023-02-09T11:12:13.596550",
+        "first_name": "John",
+        "email": "airbnb2@mail.com",
+        "password": "root",
+        "__class__": "User"
+    },
+    "BaseModel.62ecd6a6-4e1e-493d-a9c3-f3c9b99cbc19": {
+        "id": "62ecd6a6-4e1e-493d-a9c3-f3c9b99cbc19",
+        "created_at": "2023-02-09T12:17:14.163696",
+        "updated_at": "2023-02-09T12:17:14.163754",
+        "__class__": "BaseModel"
+    },
+    "User.d9eed8b6-1260-40b5-b3c2-162a2a132ac4": {
+        "id": "d9eed8b6-1260-40b5-b3c2-162a2a132ac4",
+        "created_at": "2023-02-09T12:21:38.155387",
+        "updated_at": "2023-02-09T12:21:38.155433",
+        "__class__": "User"
+    },
+    "State.966b0105-080b-4980-9cc5-0ac9a67144af": {
+        "id": "966b0105-080b-4980-9cc5-0ac9a67144af",
+        "created_at": "2023-02-09T12:21:52.179105",
+        "updated_at": "2023-02-09T12:21:52.179150",
+        "__class__": "State",
+        "name": "Fct-Abuja"
+    },
+    "City.e9c39c4b-6677-4e7e-860c-9b25894df584": {
+        "id": "e9c39c4b-6677-4e7e-860c-9b25894df584",
+        "created_at": "2023-02-09T12:22:05.267838",
+        "updated_at": "2023-02-09T12:22:05.267898",
+        "__class__": "City"
+    },
+    "Amenity.c5ceac84-8d20-4f96-904b-6b9a3f704612": {
+        "id": "c5ceac84-8d20-4f96-904b-6b9a3f704612",
+        "created_at": "2023-02-09T12:22:13.731495",
+        "updated_at": "2023-02-09T12:22:13.731539",
+        "__class__": "Amenity"
+    },
+    "Place.635fca56-4413-4db6-93e2-cb82229c838c": {
+        "id": "635fca56-4413-4db6-93e2-cb82229c838c",
+        "created_at": "2023-02-09T12:22:55.051990",
+        "updated_at": "2023-02-09T12:22:55.052048",
+        "__class__": "Place"
+    },
+    "Review.0bfc9a98-91a9-4260-be31-17b6d60c0833": {
+        "id": "0bfc9a98-91a9-4260-be31-17b6d60c0833",
+        "created_at": "2023-02-09T12:23:00.676414",
+        "updated_at": "2023-02-09T12:23:00.676471",
+        "__class__": "Review"
     }
 }
