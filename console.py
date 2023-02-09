@@ -141,15 +141,53 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, line):
-        'Exits the program'
+        'EOF or ctrl^D command to exit the program'
         return True
 
     def emptyline(self):
+        """Do nothing when empty line and enter is receive."""
         pass
 
     def default(self, line):
-        print(line, "is not a valid command")
-        print("Type 'help' to see list of available commands\n")
+        """Find the right cmd and execute it"""
+        cmd = {
+                'all': self.do_all,
+                'count': self.count,
+                'show': self.do_show,
+                'destroy': self.do_destroy
+            }
+        arg = line.replace('.', ' ').replace('(', "").replace(')', "")
+        arg = arg.replace('"', " ").split()
+
+        if len(arg) < 2:
+            return super().default(line)
+
+        if arg[1] in cmd:
+            func = cmd[arg[1]]
+            if arg[1] == 'show':
+                arg[0] = arg[0] + ' ' + arg[2]
+            if arg[1] == 'destroy':
+                arg[0] = arg[0] + ' ' + arg[2]
+            func(arg[0])
+        else:
+            return super().default(line)
+
+    def count(self, line):
+        """Retrieves the number of instances of a class"""
+        if line not in self.class_name:
+            print("** class doesn't exist **")
+            return
+        try:
+            with open('file.json', 'r') as f:
+                objs = json.loads(f.read())
+        except Exception:
+            pass
+        count = 0
+        for obj in objs.values():
+            name = obj['__class__']
+            if name == line:
+                count += 1
+        print(count)
 
 
 if __name__ == '__main__':
