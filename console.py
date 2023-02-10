@@ -1,29 +1,67 @@
-#!/usr/bin/env python3
-"""The Console"""
+#!/usr/bin/python3
+"""This is The Console Module."""
 import cmd
 import json
 from models.base_model import BaseModel
-from models import storage
 from models.user import User
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
-    """The Console class"""
+    """This model represent our console."""
 
-    prompt = '(hbnb) '
+    prompt: str = "(hbnb) "
     file = None
-    class_name = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place',
-                  'Review']
+    class_name = ['BaseModel', 'State', 'User']
+    class_name += ['City', 'Amenity', 'Place', 'Review']
+
+    def parse_input(self, cmd):
+        """Parse string pass to it."""
+        arg = cmd.replace('(', ' ').replace('"', '', -3).replace("'", "")
+        arg = arg.replace('.', ' ', 1).replace(')', '')
+        return arg
+
+    def emptyline(self) -> None:
+        """Do nothing when empty line and enter is receive."""
+        return
+
+    def default(self, line: str) -> None:
+        """Find the right cmd and execute it."""
+        cmd = {
+                'all': self.do_all,
+                'count': self.count,
+                'show': self.do_show,
+                'destroy': self.do_destroy,
+                'update': self.get_update
+            }
+        arg = self.parse_input(line).split()
+
+        if len(arg) < 2:
+            return super().default(line)
+
+        if arg[1] in cmd:
+            func = cmd[arg[1]]
+            func(line)
+        else:
+            return super().default(line)
+
+    def do_quit(self, line):
+        """Quit command to exit the program."""
+        return True
+
+    def do_EOF(self, line):
+        """EOF or ctrl^D command to exit the program."""
+        return True
 
     def do_create(self, line):
-        'Creates a new instance from class_name[]'
+        """Create an available model and save it in our file storage."""
         if not line:
-            print("** class name missing **")
+            print('** class name missing **')
         elif line not in self.class_name:
             print("** class doesn't exist **")
         else:
@@ -32,120 +70,136 @@ class HBNBCommand(cmd.Cmd):
             print(base.id)
 
     def do_show(self, line):
-        'Prints the string rep. of an instance based on the class name and id'
-        arg = line.split()
+        """Retrieve an instance of a supported model from our file storage."""
+        arg = self.parse_input(line).replace('show', '').split()
         if not line:
             print('** class name missing **')
         elif not arg[0] in self.class_name:
             print("** class doesn't exist **")
         elif len(arg) != 2:
-            print('** instance id missing **')
+            print("** instance id missing **")
         else:
             id_ = arg[0] + '.' + arg[1]
             try:
-                with open('file.json', 'r')as f:
+                with open('file.json', 'r', encoding='utf-8') as f:
                     objs = json.loads(f.read())
                 if id_ in objs:
-                    max_ = objs[id_]
-                    name = max_['__class__']
-                    base = eval(f"{name}(**max_)")
+                    out = objs[id_]
+                    name = out['__class__']
+                    base = eval(f"{name}(**out)")
                     print(base)
                 else:
-                    print('** no instance found **')
+                    print("** no instance found **")
             except Exception:
-                print('** no instance found **')
+                print("** no instance found **")
 
     def do_destroy(self, line):
-        'Deletes an instance base on class name and id'
-        arg = line.split()
+        """Delete an instance of a supported model from our file storage."""
+        arg = self.parse_input(line).replace('destroy', '').split()
         if not line:
             print('** class name missing **')
         elif not arg[0] in self.class_name:
             print("** class doesn't exist **")
         elif len(arg) != 2:
-            print('** instance id missing **')
+            print("** instance id missing **")
         else:
             id_ = arg[0] + '.' + arg[1]
             try:
-                with open('file.json', 'r')as f:
+                with open('file.json', 'r', encoding='utf-8') as f:
                     objs = json.loads(f.read())
                 if id_ in objs:
                     del objs[id_]
-                    with open('file.json', 'w')as f:
+                    with open('file.json', 'w', encoding='utf-8') as f:
                         json.dump(objs, f, indent=4)
                 else:
-                    print('** no instance found **')
+                    print("** no instance found **")
             except Exception:
-                print('** no instance found **')
+                print("** no instance found **")
 
     def do_all(self, line):
-        'Prints all str rep. of all instances based or not on the class name'
-        obj_list = []
+        """Retrieve every model instances from our file storage."""
+        line = self.parse_input(line).replace('all', '').replace(' ', '')
         objs = {}
+        objs_arr = []
         try:
-            with open('file.json', 'r') as f:
+            with open('file.json', 'r', encoding='utf-8') as f:
                 objs = json.loads(f.read())
         except Exception:
             pass
         if not line:
             for obj in objs.values():
                 name = obj['__class__']
-                base = eval(f"{name}(**obj)")
-                obj_list.append(str(base))
-            print(obj_list)
+                inst = eval(f'{name}(**obj)')
+                objs_arr.append(str(inst))
+            print(objs_arr)
         elif line not in self.class_name:
             print("** class doesn't exist **")
         else:
             for obj in objs.values():
                 name = obj['__class__']
                 if name == line:
-                    base = eval(f"{name}(**obj)")
-                    obj_list.append(str(base))
-            print(obj_list)
+                    inst = eval(f'{name}(**obj)')
+                    objs_arr.append(str(inst))
+            print(objs_arr)
 
     def do_update(self, line):
-        'Updates an instance based on the class name and id by adding \
-        or updating attributes'
-        arg = line.split(maxsplit=3)
-        arg_list = {"int": int, "float": float, "str": str}
+        """Update an instance of a supported model from our file storage."""
+        if ')' in line:
+            line = line.replace(',', '', 2)
+        arg = line.replace(')', '').replace('.', ' ').replace('(', '')
+        arg = arg.replace('update', '').split(maxsplit=3)
+        cnvt = {
+                "int": int,
+                "float": float,
+                "str": str,
+            }
         try:
             if not line:
                 print('** class name missing **')
             elif arg[0] not in self.class_name:
                 print("** class doesn't exist **")
             elif len(arg) < 2:
-                print('** instance id missing **')
-            elif arg[0] + '.' + arg[1] not in storage.all():
+                print("** instance id missing **")
+            elif arg[0] + '.' + self.parse_input(arg[1]) not in storage.all():
                 print("** no instance found **")
             elif len(arg) < 3:
                 print("** attribute name missing **")
             elif len(arg) < 4:
                 print("** value missing **")
             else:
-                with open('file.json', 'r') as f:
+                with open('file.json', 'r', encoding='utf-8') as f:
                     objs = json.loads(f.read())
-                base = eval(f'{arg[0]}()')
+                inst = eval(f'{arg[0]}()')
                 k, val = arg[2], arg[3].replace('"', '').replace("'", "")
-                key = arg[0] + '.' + arg[1]
-                typ = type(getattr(base, k, None))
+                key = arg[0] + '.' + self.parse_input(arg[1])
+                typ = type(getattr(inst, k, None))
                 if typ:
-                    if typ.__name__ in arg_list:
-                        func = arg_list[typ.__name__]
+                    if typ.__name__ in cnvt:
+                        func = cnvt[typ.__name__]
                         val = func(val)
                 obj = objs[key]
                 obj[k] = val
-                with open('file.json', 'w') as f:
+                with open('file.json', 'w', encoding='utf-8') as f:
                     json.dump(objs, f, indent=4)
         except Exception as err:
             print(err)
 
+    def get_update(self, line):
+        """Call the rightful Update Method."""
+        if '{' in line and '}' in line:
+            self.update_dict(line)
+        else:
+            self.do_update(line)
+
     def update_dict(self, line):
-        """update any model instance using dictionary format"""
+        """Update any model instance using dictionary."""
         arg = line.replace(')', '').replace('.', ' ').replace('(', '')
         arg = arg.replace('update', '').replace(',', '', 1).split(maxsplit=2)
-        arg1 = arg[1].replace('"', '').replace("'", '')
-
-        arg_list = {"int": int, "float": float, "str": str}
+        cnvt = {
+                "int": int,
+                "float": float,
+                "str": str,
+            }
 
         try:
             if not line:
@@ -154,92 +208,50 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             elif len(arg) < 2:
                 print("** instance id missing **")
-            elif arg[0] + '.' + (arg1) not in storage.all():
+            elif arg[0] + '.' + self.parse_input(arg[1]) not in storage.all():
                 print("** no instance found **")
             elif len(arg) < 3:
                 print("** dict missing **")
             else:
-                with open('file.json', 'r') as f:
+                with open('file.json', 'r', encoding='utf-8') as f:
                     objs = json.loads(f.read())
-                base = eval(f'{arg[0]}()')
+                inst = eval(f'{arg[0]}()')
                 obj_dict = eval(arg[2].replace("'", '"'))
-                key = arg[0] + '.' + arg1
+                key = arg[0] + '.' + self.parse_input(arg[1])
                 obj = objs[key]
 
                 for k, val in obj_dict.items():
-                    typ = type(getattr(base, k, None))
+                    typ = type(getattr(inst, k, None))
                     if typ:
-                        if typ.__name__ in arg_list:
-                            func = arg_list[typ.__name__]
+                        if typ.__name__ in cnvt:
+                            func = cnvt[typ.__name__]
                             val = func(val)
                     obj[k] = val
-
-                with open('file.json', 'w') as f:
+                with open('file.json', 'w', encoding='utf-8') as f:
                     json.dump(objs, f, indent=4)
         except Exception:
             pass
 
-    def do_quit(self, line):
-        'Quit command to exit the program'
-        return True
-
-    def do_EOF(self, line):
-        'EOF or ctrl^D command to exit the program'
-        return True
-
-    def emptyline(self):
-        """Do nothing when empty line and Enter is receive."""
-        pass
-
-    def default(self, line):
-        """Find the right default command(cmd) and execute it"""
-        cmd = {
-                'all': self.do_all,
-                'count': self.count,
-                'show': self.do_show,
-                'destroy': self.do_destroy,
-                'update': self.do_update
-            }
-
-        if '{' in line and '}' in line:
-            self.update_dict(line)
-        else:
-            arg = line.replace('.', ' ').replace('(', " ").replace(')', "")
-            arg = arg.replace("'", '"').replace('"', "", 4)
-            arg = arg.replace(',', "").split()
-
-            if len(arg) < 2:
-                return super().default(line)
-
-            if arg[1] in cmd:
-                func = cmd[arg[1]]
-                if arg[1] == 'show':
-                    arg[0] = arg[0] + ' ' + arg[2]
-                if arg[1] == 'destroy':
-                    arg[0] = arg[0] + ' ' + arg[2]
-                if arg[1] == 'update':
-                    arg[0] = (arg[0] + ' ' + arg[2] + ' '
-                              + arg[3] + ' ' + arg[4])
-                func(arg[0])
-            else:
-                return super().default(line)
-
     def count(self, line):
-        """Retrieves the number of instances of a class"""
+        """
+        Count the total instances of.
+        a supported model from our file storage.
+        """
+        cnt = 0
+        line = self.parse_input(line).replace('count', '').replace(' ', '')
         if line not in self.class_name:
             print("** class doesn't exist **")
             return
         try:
-            with open('file.json', 'r') as f:
+            with open('file.json', 'r', encoding='utf-8') as f:
                 objs = json.loads(f.read())
+            for obj in objs.values():
+                name = obj['__class__']
+                if name == line:
+                    cnt += 1
+            print(cnt)
         except Exception:
-            pass
-        count = 0
-        for obj in objs.values():
-            name = obj['__class__']
-            if name == line:
-                count += 1
-        print(count)
+            print(cnt)
 
 
 if __name__ == '__main__':
