@@ -154,23 +154,32 @@ class HBNBCommand(cmd.Cmd):
                 'all': self.do_all,
                 'count': self.count,
                 'show': self.do_show,
-                'destroy': self.do_destroy
+                'destroy': self.do_destroy,
+                'update': self.do_update
             }
-        arg = line.replace('.', ' ').replace('(', "").replace(')', "")
-        arg = arg.replace('"', " ").split()
 
-        if len(arg) < 2:
-            return super().default(line)
-
-        if arg[1] in cmd:
-            func = cmd[arg[1]]
-            if arg[1] == 'show':
-                arg[0] = arg[0] + ' ' + arg[2]
-            if arg[1] == 'destroy':
-                arg[0] = arg[0] + ' ' + arg[2]
-            func(arg[0])
+        if '{' in line and '}' in line:
+            #self.update_dict(line)
+            pass
         else:
-            return super().default(line)
+            arg = line.replace('.', ' ').replace('(', " ").replace(')', "")
+            arg = arg.replace("'", '"').replace('"', "", 4)
+            arg = arg.replace(',', "").split()
+
+            if len(arg) < 2:
+                return super().default(line)
+
+            if arg[1] in cmd:
+                func = cmd[arg[1]]
+                if arg[1] == 'show':
+                    arg[0] = arg[0] + ' ' + arg[2]
+                if arg[1] == 'destroy':
+                    arg[0] = arg[0] + ' ' + arg[2]
+                if arg[1] == 'update':
+                    arg[0] = arg[0] + ' ' + arg[2] + ' ' + arg[3] + ' ' + arg[4]
+                func(arg[0])
+            else:
+                return super().default(line)
 
     def count(self, line):
         """Retrieves the number of instances of a class"""
@@ -191,8 +200,4 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    import sys
-    if len(sys.argv) > 1:
-        HBNBCommand().onecmd(' '.join(sys.argv[1:]))
-    else:
-        HBNBCommand().cmdloop()
+    HBNBCommand().cmdloop()
