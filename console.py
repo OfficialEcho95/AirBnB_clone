@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""The Console"""
 import cmd
 import json
 from models.base_model import BaseModel
@@ -12,6 +13,8 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
+    """The Console class"""
+
     prompt = '(hbnb) '
     file = None
     class_name = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place',
@@ -136,8 +139,48 @@ class HBNBCommand(cmd.Cmd):
         except Exception as err:
             print(err)
 
+    def update_dict(self, line):
+        """update any model instance using dictionary format"""
+        arg = line.replace(')', '').replace('.', ' ').replace('(', '')
+        arg = arg.replace('update', '').replace(',', '', 1).split(maxsplit=2)
+        arg1 = arg[1].replace('"', '').replace("'", '')
+
+        arg_list = {"int": int, "float": float, "str": str}
+
+        try:
+            if not line:
+                print('** class name missing **')
+            elif arg[0] not in self.class_name:
+                print("** class doesn't exist **")
+            elif len(arg) < 2:
+                print("** instance id missing **")
+            elif arg[0] + '.' + (arg1) not in storage.all():
+                print("** no instance found **")
+            elif len(arg) < 3:
+                print("** dict missing **")
+            else:
+                with open('file.json', 'r') as f:
+                    objs = json.loads(f.read())
+                base = eval(f'{arg[0]}()')
+                obj_dict = eval(arg[2].replace("'", '"'))
+                key = arg[0] + '.' + arg1
+                obj = objs[key]
+
+                for k, val in obj_dict.items():
+                    typ = type(getattr(base, k, None))
+                    if typ:
+                        if typ.__name__ in arg_list:
+                            func = arg_list[typ.__name__]
+                            val = func(val)
+                    obj[k] = val
+
+                with open('file.json', 'w') as f:
+                    json.dump(objs, f, indent=4)
+        except Exception:
+            pass
+
     def do_quit(self, line):
-        'Quit command to exit the program\n'
+        'Quit command to exit the program'
         return True
 
     def do_EOF(self, line):
@@ -145,11 +188,11 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """Do nothing when empty line and enter is receive."""
+        """Do nothing when empty line and Enter is receive."""
         pass
 
     def default(self, line):
-        """Find the right cmd and execute it"""
+        """Find the right default command(cmd) and execute it"""
         cmd = {
                 'all': self.do_all,
                 'count': self.count,
@@ -159,8 +202,7 @@ class HBNBCommand(cmd.Cmd):
             }
 
         if '{' in line and '}' in line:
-            #self.update_dict(line)
-            pass
+            self.update_dict(line)
         else:
             arg = line.replace('.', ' ').replace('(', " ").replace(')', "")
             arg = arg.replace("'", '"').replace('"', "", 4)
@@ -176,7 +218,8 @@ class HBNBCommand(cmd.Cmd):
                 if arg[1] == 'destroy':
                     arg[0] = arg[0] + ' ' + arg[2]
                 if arg[1] == 'update':
-                    arg[0] = arg[0] + ' ' + arg[2] + ' ' + arg[3] + ' ' + arg[4]
+                    arg[0] = (arg[0] + ' ' + arg[2] + ' '
+                              + arg[3] + ' ' + arg[4])
                 func(arg[0])
             else:
                 return super().default(line)
