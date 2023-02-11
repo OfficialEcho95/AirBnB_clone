@@ -1,9 +1,4 @@
-<p align="center">
-  <img src="https://github.com/officialecho95/blob/AirBnB_clone/master/assets/hbnb_logo.png" alt="AirBnB logo">
-</p>
-
-<h1 align="center">HBnB</h1>
-<p align="center">An AirBnB clone.</p>
+![hbnb_logo](https://user-images.githubusercontent.com/111706856/218246185-8578fd32-ae95-434d-beff-91a772aa2142.png)
 
 
 ALXBnB is a complete web application, integrating database storage, 
