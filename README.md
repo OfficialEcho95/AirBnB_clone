@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="https://github.com/officialecho95/AirBnB_clone/master/assets/hbnb65f4a1dd9c51265f49d0.png" alt="AirBnB logo">
+</p>
+
+<h1 align="center">HBnB</h1>
+<p align="center">An AirBnB clone.</p>
+
+
 ALXBnB is a complete web application, integrating database storage, 
 a back-end API, and front-end interfacing in a clone of AirBnB. The goal of the
  project is to deploy on our server a simple copy of the AirBnB website.
