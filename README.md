@@ -9,7 +9,7 @@ a back-end API, and front-end interfacing in a clone of AirBnB. The goal of the
 ## Console :computer:
 The Console is the command line interpreter. The console provides an 
 interface between the user and the kernel and executes programs called commands.
-For example, if a user enters the "ls" command, the shell executes the command.
+For example, if a user enters the "less" command, the shell executes the command.
 It can be used to handle and manipulate all classes utilized by
 the application
 It is also capable of executing other programs such as applications,
