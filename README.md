@@ -1,6 +1,6 @@
 ALXBnB is a complete web application, integrating database storage, 
 a back-end API, and front-end interfacing in a clone of AirBnB. The goal of the
- project is to deploy on your server a simple copy of the AirBnB website.
+ project is to deploy on our server a simple copy of the AirBnB website.
 
 
 ## Console :computer:
