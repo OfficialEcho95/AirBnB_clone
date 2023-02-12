@@ -211,10 +211,10 @@ $ ./console.py
 (hbnb) create User
 6f348019-0499-420f-8eec-ef0fdc863c02
 (hbnb)
-(hbnb) update User 6f348019-0499-420f-8eec-ef0fdc863c02 first_name "Holberton"
+(hbnb) update User 6f348019-0499-420f-8eec-ef0fdc863c02 first_name "Martins"
 (hbnb) show User 6f348019-0499-420f-8eec-ef0fdc863c02
 [User] (6f348019-0499-420f-8eec-ef0fdc863c02) {'created_at': datetime.datetime(
-2019, 2, 17, 21, 54, 39, 234382), 'first_name': 'Holberton', 'updated_at': date
+2019, 2, 17, 21, 54, 39, 234382), 'first_name': 'Martins', 'updated_at': date
 time.datetime(2019, 2, 17, 21, 54, 39, 234382), 'id': '6f348019-0499-420f-8eec-
 ef0fdc863c02'}
 (hbnb)
@@ -222,14 +222,14 @@ ef0fdc863c02'}
 t")
 (hbnb) User.show(6f348019-0499-420f-8eec-ef0fdc863c02)
 [User] (6f348019-0499-420f-8eec-ef0fdc863c02) {'created_at': datetime.datetime(
-2019, 2, 17, 21, 54, 39, 234382), 'address': '98 Mission St', 'first_name': 'Ho
-lberton', 'updated_at': datetime.datetime(2019, 2, 17, 21, 54, 39, 234382), 'id
+2019, 2, 17, 21, 54, 39, 234382), 'address': '98 Mission St', 'first_name': 
+'Martins','updated_at': datetime.datetime(2019, 2, 17, 21, 54, 39, 234382), 'id
 ': '6f348019-0499-420f-8eec-ef0fdc863c02'}
 (hbnb)
 (hbnb) User.update(6f348019-0499-420f-8eec-ef0fdc863c02, {'email': 'holberton@h
 olberton.com', 'last_name': 'School'})
 [User] (6f348019-0499-420f-8eec-ef0fdc863c02) {'email': 'holberton@holberton.co
-m', 'first_name': 'Holberton', 'updated_at': datetime.datetime(2019, 2, 17, 21,
+m', 'first_name': 'Martins', 'updated_at': datetime.datetime(2019, 2, 17, 21,
 54, 39, 234382), 'address': '98 Mission St', 'last_name': 'School', 'id': '6f34
 8019-0499-420f-8eec-ef0fdc863c02', 'created_at': datetime.datetime(2019, 2, 17,
 21, 54, 39, 234382)}
