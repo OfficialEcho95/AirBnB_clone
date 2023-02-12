@@ -17,12 +17,12 @@ class HBNBCommand(cmd.Cmd):
 
     prompt: str = "(hbnb) "
     file = None
-    class_name = ['BaseModel', 'State', 'User']
-    class_name += ['City', 'Amenity', 'Place', 'Review']
+    class_name = ['BaseModel', 'State', 'User', 'City', 'Amenity',
+                  'Place', 'Review']
 
     def parse_input(self, cmd):
         """Parse string pass to it."""
-        arg = cmd.replace('(', ' ').replace('"', '', -3).replace("'", "")
+        arg = cmd.replace('(', ' ').replace('"', '').replace("'", "")
         arg = arg.replace('.', ' ', 1).replace(')', '')
         return arg
 

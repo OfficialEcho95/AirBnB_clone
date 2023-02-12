@@ -5,6 +5,7 @@
 import json
 import unittest
 import sys
+import os
 from io import StringIO
 from unittest.mock import patch
 from console import HBNBCommand
@@ -20,6 +21,24 @@ from models import storage
 
 class TestConsole(unittest.TestCase):
     """Implement Unittest for the console."""
+
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+
+    @classmethod
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
 
     def test_empty_line(self):
         """Test empty line method."""
