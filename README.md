@@ -226,8 +226,8 @@ t")
 'Martins','updated_at': datetime.datetime(2019, 2, 17, 21, 54, 39, 234382), 'id
 ': '6f348019-0499-420f-8eec-ef0fdc863c02'}
 (hbnb)
-(hbnb) User.update(6f348019-0499-420f-8eec-ef0fdc863c02, {'email': 'holberton@h
-olberton.com', 'last_name': 'School'})
+(hbnb) User.update(6f348019-0499-420f-8eec-ef0fdc863c02, {'email': 
+'martinsndifon@gmail.com', 'last_name': 'School'})
 [User] (6f348019-0499-420f-8eec-ef0fdc863c02) {'email': 'holberton@holberton.co
 m', 'first_name': 'Martins', 'updated_at': datetime.datetime(2019, 2, 17, 21,
 54, 39, 234382), 'address': '98 Mission St', 'last_name': 'School', 'id': '6f34
