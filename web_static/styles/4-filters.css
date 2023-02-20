@@ -17,3 +17,7 @@
     margin-right: 30px;
     margin-left: auto;
 }
+.filters button:hover {
+	opacity: 0.9;
+}
+
